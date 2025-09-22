@@ -1,7 +1,8 @@
 # Aplicação principal do sistema de clínica veterinária
 # Desenvolvido em Ruby com Sinatra
+require 'rubygems'
+require 'bundler/setup'
 require 'sinatra/base'
-require 'sinatra/reloader'
 require 'sequel'
 require 'bcrypt'
 require 'rack-flash'
@@ -14,12 +15,6 @@ require_relative 'models/appointment'
 require_relative 'models/medical_record'
 
 class VeterinaryApp < Sinatra::Base
-  # Configuração para ambiente de desenvolvimento
-  configure :development do
-    register Sinatra::Reloader
-    also_reload 'models/*.rb'
-  end
-
   # Configuração de sessões e flash messages
   use Rack::Session::Cookie, secret: 'veterinary_clinic_secret_key_2024'
   use Rack::Flash

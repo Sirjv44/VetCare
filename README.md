@@ -92,8 +92,6 @@ O banco de dados SQLite será criado automaticamente na primeira execução. As 
 # Executar com recarga automática (recomendado para desenvolvimento)
 bundle exec rerun rackup config.ru
 
-# Ou simplesmente
-rerun rackup
 ```
 
 ### Modo de Produção
@@ -101,8 +99,6 @@ rerun rackup
 # Executar normalmente
 bundle exec rackup config.ru
 
-# Ou
-rackup
 ```
 
 O sistema estará disponível em: **http://localhost:9292**
