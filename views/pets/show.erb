@@ -39,7 +39,7 @@
             </div>
             <div class="card-body">
                 <% if @pet.appointments.any? %>
-                    <% @pet.appointments.order(:date_time).reverse.each do |appointment| %>
+                    <% @pet.appointments.sort_by(&:date_time).reverse.each do |appointment| %>
                         <div class="d-flex justify-content-between align-items-start mb-2 p-2 border-bottom">
                             <div>
                                 <strong><%= format_datetime(appointment.date_time) %></strong>
@@ -65,7 +65,7 @@
             </div>
             <div class="card-body">
                 <% if @pet.medical_records.any? %>
-                    <% @pet.medical_records.order(:date).reverse.each do |record| %>
+                    <% @pet.medical_records.sort_by(&:date).reverse.each do |record| %>
                         <div class="mb-3 p-3 bg-light rounded">
                             <div class="d-flex justify-content-between align-items-start mb-2">
                                 <strong><%= format_date(record.date) %></strong>

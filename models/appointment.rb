@@ -18,8 +18,9 @@ class Appointment < Sequel::Model
     errors.add(:date_time, 'não pode estar em branco') if date_time.nil?
     # Motivo da consulta é obrigatório
     errors.add(:reason, 'não pode estar em branco') if reason.nil? || reason.empty?
-    # Data não pode ser no passado (comentado para permitir edição de consultas antigas)
-    errors.add(:date_time, 'não pode ser no passado') if date_time && date_time < DateTime.now
+    # Data não pode ser no passado (usando Time.now para compatibilidade)
+    # Comentado para permitir edição de consultas antigas
+    # errors.add(:date_time, 'não pode ser no passado') if date_time && date_time.to_time < Time.now
   end
 
   # ==================== CALLBACKS ====================
