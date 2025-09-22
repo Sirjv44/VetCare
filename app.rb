@@ -18,6 +18,8 @@ class VeterinaryApp < Sinatra::Base
   # Configuração de sessões e flash messages
   use Rack::Session::Cookie, secret: 'veterinary_clinic_secret_key_2024'
   use Rack::Flash
+  # Middleware para permitir métodos PUT, DELETE via _method
+  use Rack::MethodOverride
 
   # Configuração de diretórios
   set :views, './views'
@@ -271,17 +273,23 @@ class VeterinaryApp < Sinatra::Base
     @appointment = Appointment[params[:id]]
     halt 404 unless @appointment
     
-    @appointment.update(
-      pet_id: params[:pet_id].to_i,
-      # Combinar data e hora em um DateTime
-      date_time: DateTime.parse("#{params[:date]} #{params[:time]}"),
-      reason: params[:reason],
-      notes: params[:notes],
-      status: params[:status]
-    )
-    
-    flash[:success] = 'Consulta atualizada com sucesso!'
-    redirect "/appointments/#{@appointment.id}"
+    begin
+      @appointment.update(
+        pet_id: params[:pet_id].to_i,
+        # Combinar data e hora em um DateTime
+        date_time: DateTime.parse("#{params[:date]} #{params[:time]}"),
+        reason: params[:reason],
+        notes: params[:notes],
+        status: params[:status]
+      )
+      
+      flash[:success] = 'Consulta atualizada com sucesso!'
+      redirect "/appointments/#{@appointment.id}"
+    rescue => e
+      @pets = Pet.eager(:client).order(:name).all
+      flash[:error] = "Erro ao atualizar consulta: #{e.message}"
+      erb :'appointments/edit'
+    end
   end
 
   # Remover consulta
