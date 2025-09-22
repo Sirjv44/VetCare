@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Consultas</h1>
+    <a href="/appointments/new" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Nova Consulta
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <% if @appointments.any? %>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Pet</th>
+                            <th>Cliente</th>
+                            <th>Motivo</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @appointments.each do |appointment| %>
+                            <tr>
+                                <td><%= format_datetime(appointment.date_time) %></td>
+                                <td><%= appointment.pet.name %></td>
+                                <td><%= appointment.pet.client.name %></td>
+                                <td><%= appointment.reason %></td>
+                                <td>
+                                    <span class="badge <%= appointment.status_badge_class %>">
+                                        <%= appointment.status.capitalize %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="/appointments/<%= appointment.id %>" class="btn btn-outline-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="/appointments/<%= appointment.id %>/edit" class="btn btn-outline-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form method="POST" action="/appointments/<%= appointment.id %>" style="display: inline;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-outline-danger" 
+                                                    onclick="return confirm('Tem certeza que deseja remover esta consulta?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        <% else %>
+            <div class="text-center py-5">
+                <i class="fas fa-calendar-check fa-3x text-muted mb-3"></i>
+                <h4>Nenhuma consulta agendada</h4>
+                <p class="text-muted">Comece agendando a primeira consulta.</p>
+                <a href="/appointments/new" class="btn btn-primary">Agendar Consulta</a>
+            </div>
+        <% end %>
+    </div>
+</div>

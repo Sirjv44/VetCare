@@ -1,0 +1,95 @@
+<!-- Formulário para cadastro de novo pet -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Novo Pet</h1>
+    <a href="/pets" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Voltar
+    </a>
+</div>
+
+<div class="card">
+    <!-- Formulário com validação HTML5 -->
+    <div class="card-body">
+        <form method="POST" action="/pets">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome do Pet *</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                </div>
+                <!-- Select com lista de clientes -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="client_id" class="form-label">Cliente *</label>
+                        <select class="form-control" id="client_id" name="client_id" required>
+                            <option value="">Selecione o cliente</option>
+                            <% @clients.each do |client| %>
+                                <option value="<%= client.id %>"><%= client.name %></option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <!-- Select com tipos de animais mais comuns -->
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="species" class="form-label">Espécie *</label>
+                        <select class="form-control" id="species" name="species" required>
+                            <option value="">Selecione</option>
+                            <option value="Cão">Cão</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Coelho">Coelho</option>
+                            <option value="Hamster">Hamster</option>
+                            <option value="Porquinho-da-índia">Porquinho-da-índia</option>
+                            <option value="Ferret">Ferret</option>
+                            <option value="Pássaro">Pássaro</option>
+                            <option value="Papagaio">Papagaio</option>
+                            <option value="Canário">Canário</option>
+                            <option value="Peixe">Peixe</option>
+                            <option value="Tartaruga">Tartaruga</option>
+                            <option value="Iguana">Iguana</option>
+                            <option value="Chinchila">Chinchila</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="breed" class="form-label">Raça</label>
+                        <input type="text" class="form-control" id="breed" name="breed" placeholder="Ex: Golden Retriever, SRD">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="color" class="form-label">Cor</label>
+                        <input type="text" class="form-control" id="color" name="color" placeholder="Ex: Caramelo, Preto e Branco">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campos numéricos para idade e peso -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Idade (anos)</label>
+                        <input type="number" class="form-control" id="age" name="age" min="0" max="30">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Peso (kg)</label>
+                        <input type="number" class="form-control" id="weight" name="weight" step="0.1" min="0">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botões de ação -->
+            <div class="d-flex justify-content-end gap-2">
+                <a href="/pets" class="btn btn-outline-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Cadastrar Pet</button>
+            </div>
+        </form>
+    </div>
+</div>

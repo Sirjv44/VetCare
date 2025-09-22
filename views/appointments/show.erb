@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Detalhes da Consulta</h1>
+    <div class="btn-group">
+        <a href="/appointments/<%= @appointment.id %>/edit" class="btn btn-outline-primary">
+            <i class="fas fa-edit"></i> Editar
+        </a>
+        <a href="/appointments" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Informações da Consulta</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Data/Hora:</strong> <%= format_datetime(@appointment.date_time) %></p>
+                        <p><strong>Pet:</strong> <%= @appointment.pet.name %></p>
+                        <p><strong>Cliente:</strong> <%= @appointment.pet.client.name %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Motivo:</strong> <%= @appointment.reason %></p>
+                        <p><strong>Status:</strong> 
+                            <span class="badge <%= @appointment.status_badge_class %>">
+                                <%= @appointment.status.capitalize %>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                
+                <% if @appointment.notes && !@appointment.notes.empty? %>
+                    <hr>
+                    <div>
+                        <strong>Observações:</strong>
+                        <p class="mt-2"><%= @appointment.notes %></p>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">Informações do Pet</h6>
+            </div>
+            <div class="card-body">
+                <p><strong>Nome:</strong> <%= @appointment.pet.name %></p>
+                <p><strong>Espécie:</strong> <%= @appointment.pet.species %></p>
+                <p><strong>Raça:</strong> <%= @appointment.pet.breed || 'SRD' %></p>
+                <p><strong>Idade:</strong> <%= @appointment.pet.age_display %></p>
+                
+                <div class="d-grid">
+                    <a href="/pets/<%= @appointment.pet.id %>" class="btn btn-outline-primary btn-sm">
+                        Ver Detalhes do Pet
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0">Contato do Cliente</h6>
+            </div>
+            <div class="card-body">
+                <p><strong>Nome:</strong> <%= @appointment.pet.client.name %></p>
+                <p><strong>Telefone:</strong> <%= @appointment.pet.client.phone || 'N/A' %></p>
+                <p><strong>Email:</strong> <%= @appointment.pet.client.email || 'N/A' %></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,366 @@
+/* ==================== VARIÁVEIS CSS ==================== */
+/* Definição de cores e valores reutilizáveis */
+:root {
+    --primary-color: #2563eb;        /* Azul principal */
+    --primary-dark: #1d4ed8;         /* Azul escuro para hover */
+    --secondary-color: #059669;      /* Verde secundário */
+    --accent-color: #f97316;         /* Laranja para destaques */
+    --success-color: #10b981;        /* Verde para sucesso */
+    --warning-color: #f59e0b;        /* Amarelo para avisos */
+    --danger-color: #ef4444;         /* Vermelho para perigo */
+    --light-bg: #f8fafc;             /* Fundo claro */
+    --sidebar-bg: #1e293b;           /* Fundo da sidebar */
+    --sidebar-text: #cbd5e1;         /* Texto da sidebar */
+}
+
+/* ==================== ESTILOS GERAIS ==================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    line-height: 1.6;
+}
+
+/* ==================== SIDEBAR ==================== */
+/* Menu lateral fixo */
+.sidebar {
+    position: fixed;                    /* Fixo na tela */
+    top: 0;                            /* Colado no topo */
+    bottom: 0;                         /* Colado na base */
+    left: 0;                           /* Colado à esquerda */
+    z-index: 100;                      /* Acima de outros elementos */
+    padding: 0;                        /* Sem padding interno */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);  /* Sombra sutil */
+    background-color: var(--sidebar-bg);  /* Cor de fundo escura */
+    color: var(--sidebar-text);           /* Cor do texto */
+}
+
+/* Container interno da sidebar */
+.sidebar-sticky {
+    position: sticky;                   /* Sticky para scroll */
+    top: 0;                            /* Colado no topo */
+    height: 100vh;                     /* Altura total da viewport */
+    padding-top: 0.5rem;               /* Padding superior */
+    overflow-x: hidden;                /* Sem scroll horizontal */
+    overflow-y: auto;                  /* Scroll vertical se necessário */
+}
+
+/* Logo da clínica */
+.clinic-logo {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);  /* Linha divisória */
+    margin-bottom: 1rem;
+}
+
+.clinic-logo h4 {
+    color: #fff;                       /* Texto branco */
+    font-weight: bold;                 /* Negrito */
+    margin-bottom: 0.25rem;
+}
+
+.clinic-logo small {
+    color: var(--sidebar-text);        /* Cor mais suave */
+    font-size: 0.8rem;                 /* Texto menor */
+}
+
+/* Links de navegação */
+.sidebar .nav-link {
+    color: var(--sidebar-text);        /* Cor padrão */
+    padding: 0.75rem 1rem;             /* Espaçamento interno */
+    font-weight: 500;                  /* Peso da fonte */
+    border-radius: 0.5rem;             /* Bordas arredondadas */
+    margin: 0.25rem 1rem;              /* Margem externa */
+    transition: all 0.2s ease;         /* Transição suave */
+}
+
+/* Efeito hover nos links */
+.sidebar .nav-link:hover {
+    color: #fff;                       /* Texto branco no hover */
+    background-color: rgba(255, 255, 255, 0.1);  /* Fundo semi-transparente */
+    transform: translateX(2px);        /* Pequeno movimento à direita */
+}
+
+/* Link ativo */
+.sidebar .nav-link.active {
+    color: #fff;                       /* Texto branco */
+    background-color: var(--primary-color);  /* Fundo azul */
+}
+
+/* Ícones dos links */
+.sidebar .nav-link i {
+    margin-right: 0.75rem;             /* Espaço à direita do ícone */
+    width: 16px;                       /* Largura fixa */
+    text-align: center;                /* Centralizado */
+}
+
+/* ==================== CONTEÚDO PRINCIPAL ==================== */
+.main-content {
+    margin-left: 16.666667%;           /* Espaço para a sidebar (2 colunas de 12) */
+    padding: 2rem;                     /* Padding interno */
+    min-height: 100vh;                 /* Altura mínima da viewport */
+}
+
+/* ==================== CARDS ==================== */
+.card {
+    border: none;                      /* Sem borda padrão */
+    border-radius: 0.75rem;            /* Bordas bem arredondadas */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);  /* Sombra sutil */
+    margin-bottom: 1.5rem;             /* Espaço inferior */
+    transition: box-shadow 0.2s ease;  /* Transição suave da sombra */
+}
+
+/* Efeito hover nos cards */
+.card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);  /* Sombra mais intensa */
+}
+
+/* Cabeçalho dos cards */
+.card-header {
+    background-color: #fff;            /* Fundo branco */
+    border-bottom: 1px solid #e2e8f0;  /* Linha divisória */
+    font-weight: 600;                  /* Texto em negrito */
+    border-radius: 0.75rem 0.75rem 0 0 !important;  /* Bordas superiores arredondadas */
+}
+
+/* ==================== CARDS DE ESTATÍSTICAS ==================== */
+.stats-card {
+    border-left: 4px solid;            /* Borda colorida à esquerda */
+    transition: transform 0.2s ease;   /* Transição suave */
+}
+
+/* Efeito hover nos cards de estatísticas */
+.stats-card:hover {
+    transform: translateY(-2px);       /* Movimento para cima */
+}
+
+/* Variações de cores para os cards de estatísticas */
+.stats-card.stats-primary {
+    border-left-color: var(--primary-color);
+}
+
+.stats-card.stats-success {
+    border-left-color: var(--success-color);
+}
+
+.stats-card.stats-info {
+    border-left-color: var(--accent-color);
+}
+
+/* Ícones dos cards de estatísticas */
+.stats-icon {
+    font-size: 2rem;                   /* Tamanho grande */
+    opacity: 0.7;                      /* Semi-transparente */
+    color: var(--primary-color);       /* Cor padrão */
+}
+
+/* Cores específicas para ícones */
+.stats-card.stats-success .stats-icon {
+    color: var(--success-color);
+}
+
+.stats-card.stats-info .stats-icon {
+    color: var(--accent-color);
+}
+
+/* ==================== CARDS DE PETS ==================== */
+.pet-card {
+    border-left: 4px solid var(--secondary-color);  /* Borda verde */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;  /* Transições suaves */
+}
+
+.pet-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ==================== BADGES ==================== */
+.badge {
+    font-weight: 500;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+}
+
+.badge-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.badge-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.badge-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.badge-secondary {
+    background-color: #6b7280;
+    color: white;
+}
+
+/* ==================== BOTÕES ==================== */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    padding: 0.5rem 1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* ==================== TABELAS ==================== */
+.table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #f8fafc;
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* ==================== FORMULÁRIOS ==================== */
+.form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-label {
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+/* ==================== ALERTAS ==================== */
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border-left: 4px solid var(--success-color);
+}
+
+.alert-danger {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-left: 4px solid var(--danger-color);
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+@media (max-width: 767.98px) {
+    .sidebar {
+        display: none;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+/* ==================== ANIMAÇÕES ==================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.3s ease;
+}
+
+/* ==================== CLASSES UTILITÁRIAS ==================== */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.text-warning {
+    color: var(--warning-color) !important;
+}
+
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+.bg-light {
+    background-color: var(--light-bg) !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+/* ==================== SCROLLBAR CUSTOMIZADA ==================== */
+.sidebar-sticky::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-sticky::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-sticky::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.sidebar-sticky::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}

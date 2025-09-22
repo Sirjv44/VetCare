@@ -1,0 +1,98 @@
+<!-- Formulário para edição de pet existente -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Editar Pet</h1>
+    <a href="/pets/<%= @pet.id %>" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Voltar
+    </a>
+</div>
+
+<div class="card">
+    <!-- Formulário pré-preenchido com dados atuais -->
+    <div class="card-body">
+        <form method="POST" action="/pets/<%= @pet.id %>">
+            <!-- Campo hidden para método PUT (Sinatra method override) -->
+            <input type="hidden" name="_method" value="PUT">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome do Pet *</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<%= @pet.name %>" required>
+                    </div>
+                </div>
+                <!-- Select de clientes com valor atual selecionado -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="client_id" class="form-label">Cliente *</label>
+                        <select class="form-control" id="client_id" name="client_id" required>
+                            <% @clients.each do |client| %>
+                                <option value="<%= client.id %>" <%= 'selected' if client.id == @pet.client_id %>>
+                                    <%= client.name %>
+                                </option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <!-- Select de espécies com valor atual selecionado -->
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="species" class="form-label">Espécie *</label>
+                        <select class="form-control" id="species" name="species" required>
+                            <option value="Cão" <%= 'selected' if @pet.species == 'Cão' %>>Cão</option>
+                            <option value="Gato" <%= 'selected' if @pet.species == 'Gato' %>>Gato</option>
+                            <option value="Coelho" <%= 'selected' if @pet.species == 'Coelho' %>>Coelho</option>
+                            <option value="Hamster" <%= 'selected' if @pet.species == 'Hamster' %>>Hamster</option>
+                            <option value="Porquinho-da-índia" <%= 'selected' if @pet.species == 'Porquinho-da-índia' %>>Porquinho-da-índia</option>
+                            <option value="Ferret" <%= 'selected' if @pet.species == 'Ferret' %>>Ferret</option>
+                            <option value="Pássaro" <%= 'selected' if @pet.species == 'Pássaro' %>>Pássaro</option>
+                            <option value="Papagaio" <%= 'selected' if @pet.species == 'Papagaio' %>>Papagaio</option>
+                            <option value="Canário" <%= 'selected' if @pet.species == 'Canário' %>>Canário</option>
+                            <option value="Peixe" <%= 'selected' if @pet.species == 'Peixe' %>>Peixe</option>
+                            <option value="Tartaruga" <%= 'selected' if @pet.species == 'Tartaruga' %>>Tartaruga</option>
+                            <option value="Iguana" <%= 'selected' if @pet.species == 'Iguana' %>>Iguana</option>
+                            <option value="Chinchila" <%= 'selected' if @pet.species == 'Chinchila' %>>Chinchila</option>
+                            <option value="Outros" <%= 'selected' if @pet.species == 'Outros' %>>Outros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="breed" class="form-label">Raça</label>
+                        <input type="text" class="form-control" id="breed" name="breed" value="<%= @pet.breed %>">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="color" class="form-label">Cor</label>
+                        <input type="text" class="form-control" id="color" name="color" value="<%= @pet.color %>">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campos numéricos com valores atuais -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Idade (anos)</label>
+                        <input type="number" class="form-control" id="age" name="age" value="<%= @pet.age %>" min="0" max="30">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Peso (kg)</label>
+                        <input type="number" class="form-control" id="weight" name="weight" value="<%= @pet.weight %>" step="0.1" min="0">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botões de ação -->
+            <div class="d-flex justify-content-end gap-2">
+                <a href="/pets/<%= @pet.id %>" class="btn btn-outline-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Atualizar Pet</button>
+            </div>
+        </form>
+    </div>
+</div>

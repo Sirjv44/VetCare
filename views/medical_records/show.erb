@@ -1,0 +1,89 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Registro Médico</h1>
+    <a href="/medical_records" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Voltar
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    Registro de <%= format_date(@medical_record.date) %>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h6 class="text-primary">Diagnóstico</h6>
+                    <p><%= @medical_record.diagnosis %></p>
+                </div>
+                
+                <% if @medical_record.treatment && !@medical_record.treatment.empty? %>
+                    <div class="mb-4">
+                        <h6 class="text-success">Tratamento</h6>
+                        <p><%= @medical_record.treatment %></p>
+                    </div>
+                <% end %>
+                
+                <% if @medical_record.medications && !@medical_record.medications.empty? %>
+                    <div class="mb-4">
+                        <h6 class="text-warning">Medicamentos</h6>
+                        <p><%= @medical_record.medications %></p>
+                    </div>
+                <% end %>
+                
+                <% if @medical_record.notes && !@medical_record.notes.empty? %>
+                    <div class="mb-4">
+                        <h6 class="text-info">Observações</h6>
+                        <p><%= @medical_record.notes %></p>
+                    </div>
+                <% end %>
+                
+                <div class="row text-muted">
+                    <div class="col-md-6">
+                        <small>
+                            <strong>Veterinário:</strong> <%= @medical_record.veterinarian || 'N/A' %>
+                        </small>
+                    </div>
+                    <div class="col-md-6">
+                        <small>
+                            <strong>Registro criado em:</strong> <%= format_date(@medical_record.created_at) %>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">Informações do Pet</h6>
+            </div>
+            <div class="card-body">
+                <p><strong>Nome:</strong> <%= @medical_record.pet.name %></p>
+                <p><strong>Espécie:</strong> <%= @medical_record.pet.species %></p>
+                <p><strong>Raça:</strong> <%= @medical_record.pet.breed || 'SRD' %></p>
+                <p><strong>Idade:</strong> <%= @medical_record.pet.age_display %></p>
+                
+                <div class="d-grid">
+                    <a href="/pets/<%= @medical_record.pet.id %>" class="btn btn-outline-primary btn-sm">
+                        Ver Detalhes do Pet
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0">Cliente</h6>
+            </div>
+            <div class="card-body">
+                <p><strong>Nome:</strong> <%= @medical_record.pet.client.name %></p>
+                <p><strong>Telefone:</strong> <%= @medical_record.pet.client.phone || 'N/A' %></p>
+                <p><strong>Email:</strong> <%= @medical_record.pet.client.email || 'N/A' %></p>
+            </div>
+        </div>
+    </div>
+</div>

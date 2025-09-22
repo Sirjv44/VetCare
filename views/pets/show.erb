@@ -1,0 +1,89 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>
+        <i class="fas fa-paw text-primary"></i> <%= @pet.name %>
+    </h1>
+    <div class="btn-group">
+        <a href="/pets/<%= @pet.id %>/edit" class="btn btn-outline-primary">
+            <i class="fas fa-edit"></i> Editar
+        </a>
+        <a href="/pets" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Informações do Pet</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Cliente:</strong> <%= @pet.client.name %></p>
+                <p><strong>Espécie:</strong> <%= @pet.species %></p>
+                <p><strong>Raça:</strong> <%= @pet.breed || 'SRD' %></p>
+                <p><strong>Idade:</strong> <%= @pet.age_display %></p>
+                <p><strong>Peso:</strong> <%= @pet.weight ? "#{@pet.weight} kg" : 'N/A' %></p>
+                <p><strong>Cor:</strong> <%= @pet.color || 'N/A' %></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Consultas</h5>
+                <a href="/appointments/new" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i> Agendar Consulta
+                </a>
+            </div>
+            <div class="card-body">
+                <% if @pet.appointments.any? %>
+                    <% @pet.appointments.order(:date_time).reverse.each do |appointment| %>
+                        <div class="d-flex justify-content-between align-items-start mb-2 p-2 border-bottom">
+                            <div>
+                                <strong><%= format_datetime(appointment.date_time) %></strong>
+                                <p class="mb-0 text-muted"><%= appointment.reason %></p>
+                            </div>
+                            <span class="badge <%= appointment.status_badge_class %>">
+                                <%= appointment.status.capitalize %>
+                            </span>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <p class="text-muted">Nenhuma consulta agendada.</p>
+                <% end %>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Histórico Médico</h5>
+                <a href="/medical_records/new" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i> Novo Registro
+                </a>
+            </div>
+            <div class="card-body">
+                <% if @pet.medical_records.any? %>
+                    <% @pet.medical_records.order(:date).reverse.each do |record| %>
+                        <div class="mb-3 p-3 bg-light rounded">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <strong><%= format_date(record.date) %></strong>
+                                <small class="text-muted">Dr. <%= record.veterinarian %></small>
+                            </div>
+                            <p class="mb-1"><strong>Diagnóstico:</strong> <%= record.diagnosis %></p>
+                            <% if record.treatment && !record.treatment.empty? %>
+                                <p class="mb-1"><strong>Tratamento:</strong> <%= record.treatment %></p>
+                            <% end %>
+                            <% if record.medications && !record.medications.empty? %>
+                                <p class="mb-0"><strong>Medicamentos:</strong> <%= record.medications %></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <p class="text-muted">Nenhum registro médico encontrado.</p>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

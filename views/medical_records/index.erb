@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Histórico Médico</h1>
+    <a href="/medical_records/new" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Novo Registro
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <% if @medical_records.any? %>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Pet</th>
+                            <th>Cliente</th>
+                            <th>Diagnóstico</th>
+                            <th>Veterinário</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @medical_records.each do |record| %>
+                            <tr>
+                                <td><%= format_date(record.date) %></td>
+                                <td><%= record.pet.name %></td>
+                                <td><%= record.pet.client.name %></td>
+                                <td><%= record.diagnosis %></td>
+                                <td><%= record.veterinarian || 'N/A' %></td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="/medical_records/<%= record.id %>" class="btn btn-outline-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        <% else %>
+            <div class="text-center py-5">
+                <i class="fas fa-file-medical fa-3x text-muted mb-3"></i>
+                <h4>Nenhum registro médico encontrado</h4>
+                <p class="text-muted">Comece criando o primeiro registro médico.</p>
+                <a href="/medical_records/new" class="btn btn-primary">Criar Registro</a>
+            </div>
+        <% end %>
+    </div>
+</div>
